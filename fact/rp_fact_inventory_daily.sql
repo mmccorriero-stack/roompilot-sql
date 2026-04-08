@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS fact_inventory_daily;
+DROP TABLE IF EXISTS rp_fact_inventory_daily;
 
-CREATE TABLE fact_inventory_daily AS
+CREATE TABLE rp_fact_inventory_daily AS
 SELECT
     d.full_date AS inventory_date,
     d.date_key AS inventory_date_key,
@@ -21,6 +21,10 @@ SELECT
     END AS is_open,
 
     NULL AS notes
+
+FROM dim_date d
+CROSS JOIN dim_hotel h
+WHERE h.is_active = 1;
 
 FROM dim_date d
 CROSS JOIN dim_hotel h
